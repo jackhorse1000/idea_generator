@@ -1,74 +1,79 @@
 # idea-gen-lib
 
-Standalone library for generating, deduplicating, and scoring business ideas using LLMs.
+Generate, deduplicate, and score business ideas using LLMs.
 
 ## Features
-- Generate ideas from a topic using LLMs
+
+- Generate ideas from a topic using LLMs (via OpenRouter)
 - Deduplicate ideas using semantic similarity
 - Score ideas for effort, revenue, and feasibility
-- **Feedback loop**: iteratively refine ideas with LLM feedback
+- Iterative feedback loop to refine ideas across multiple rounds
 - Simple CLI and Python API
 
 ## Quickstart
 
-1. Install dependencies:
+1. Install:
+
    ```bash
    poetry install
    ```
-2. Provide your OpenRouter API key via environment or `.env` (not committed):
-   ```
-   OPENROUTER_API_KEY=sk-or-...
-   ```
-   Note: `.env` is ignored by `.gitignore`. Do not commit secrets.
-3. Run the CLI:
+
+2. Set your OpenRouter API key:
+
    ```bash
-   poetry run ideagen "AI tools for small businesses" -n 10 --output results.json --scores-output scores.json
+   export OPENROUTER_API_KEY=sk-or-...
    ```
 
-## Library Usage
+   Or create a `.env` file (ignored by git).
+
+3. Run:
+
+   ```bash
+   poetry run ideagen "AI tools for small businesses" -n 5
+   ```
+
+## Python API
 
 ```python
-from ideagen import Pipeline
-pipeline = Pipeline(api_key="sk-or-...")
-results = pipeline.run(topic="AI tools", num_ideas=10)
-```
+from ideagen import Pipeline, PipelineConfig
 
-## CLI Usage
-
-```bash
-ideagen "AI tools" -n 10 --output results.json
-```
-
-## Custom Prompts
-
-You can pass your own generation and evaluation prompts via the API or CLI.
-
-## Feedback Loop
-
-Run multiple generate-evaluate iterations where evaluation feedback guides subsequent generations:
-
-```python
-from ideagen import Pipeline
-
+# Simple usage
 pipeline = Pipeline()
-results = pipeline.run(
-    topic="AI tools for small businesses",
-    num_ideas=5,
-    iterations=3  # Run 3 generate-evaluate cycles
-)
+results = pipeline.run(topic="AI tools", num_ideas=5)
 
-# Ideas include _iteration field showing which round generated them
+# With config
+config = PipelineConfig(
+    model="openai/gpt-4.1-nano",
+    skip_dedupe=False,
+    skip_score=False,
+)
+pipeline = Pipeline(config=config)
+results = pipeline.run(topic="AI tools", num_ideas=5, iterations=2)
+
 for idea in results.ideas:
     name = list(idea.keys())[0]
     print(f"{name} (iteration {idea[name].get('_iteration')})")
 ```
 
-CLI usage:
+## CLI
+
 ```bash
-poetry run ideagen "AI tools" -n 5 --iterations 3 --output results.json
+# Basic
+poetry run ideagen "AI tools" -n 5 --output ideas.json
+
+# With iterations and scoring
+poetry run ideagen "AI tools" -n 5 --iterations 3 --scores-output scores.json
+
+# Custom prompts
+poetry run ideagen "AI tools" -n 5 --generation-prompt prompt.txt
 ```
 
-See `examples/feedback_loop/` for a complete example with custom prompts.
+## Examples
+
+See `examples/` for complete usage:
+
+- `examples/basic/` — simple generation with custom prompts
+- `examples/iterative/` — multi-round feedback loop
 
 ## Testing
 

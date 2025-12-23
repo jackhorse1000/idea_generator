@@ -1,5 +1,14 @@
-from .pipeline import Pipeline
-from .llm.config import LlmConfig
-from .generators.idea_generator import IdeaGenerator
-from .processors.deduplicator import IdeaDeduplicator
-from .generators.scorer import EffortRevenueScorer
+from ideagen.config import LlmConfig, PipelineConfig
+from ideagen.generators.idea_generator import IdeaGenerator
+from ideagen.generators.scorer import EffortRevenueScorer
+from ideagen.pipeline import Pipeline
+from ideagen.processors.deduplicator import IdeaDeduplicator
+
+__all__ = [
+    "Pipeline",
+    "PipelineConfig",
+    "LlmConfig",
+    "IdeaGenerator",
+    "IdeaDeduplicator",
+    "EffortRevenueScorer",
+]
