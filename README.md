@@ -1,2 +1,49 @@
-# idea_generator
-Generate lots of ideas on topics you care about 
+# idea-gen-lib
+
+Standalone library for generating, deduplicating, and scoring business ideas using LLMs.
+
+## Features
+- Generate ideas from a topic using LLMs
+- Deduplicate ideas using semantic similarity
+- Score ideas for effort, revenue, and feasibility
+- Simple CLI and Python API
+
+## Quickstart
+
+1. Install dependencies:
+   ```bash
+   poetry install
+   ```
+2. Provide your OpenRouter API key via environment or `.env` (not committed):
+   ```
+   OPENROUTER_API_KEY=sk-or-...
+   ```
+   Note: `.env` is ignored by `.gitignore`. Do not commit secrets.
+3. Run the CLI:
+   ```bash
+   poetry run ideagen "AI tools for small businesses" -n 10 --output results.json --scores-output scores.json
+   ```
+
+## Library Usage
+
+```python
+from ideagen import Pipeline
+pipeline = Pipeline(api_key="sk-or-...")
+results = pipeline.run(topic="AI tools", num_ideas=10)
+```
+
+## CLI Usage
+
+```bash
+ideagen "AI tools" -n 10 --output results.json
+```
+
+## Custom Prompts
+
+You can pass your own generation and evaluation prompts via the API or CLI.
+
+## Testing
+
+```bash
+poetry run pytest -v
+```

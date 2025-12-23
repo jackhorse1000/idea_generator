@@ -1,0 +1,13 @@
+Score the following business ideas for:
+- Implementation effort (hours)
+- Monthly revenue (min/max)
+- Feasibility for a solo developer
+- Key assumptions
+- Tech stack alignment
+- Business model fit
+
+Output as JSON with a top-level key named "idea_scores".
+For each idea_name, include all the score fields provided above.
+
+Ideas:
+{ideas_json}

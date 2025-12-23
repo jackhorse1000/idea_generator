@@ -1,0 +1,13 @@
+Score each dinner idea on:
+- total_time (prep + cook, in minutes)
+- ingredient_count (number of ingredients)
+- health_score (1-10, 10 being very healthy)
+- difficulty (1-10, 1 being easiest)
+- taste_appeal (1-10)
+- estimated_cost_usd (per serving)
+- would_make (yes/no with brief reason)
+
+Output as JSON with a top-level key named "idea_scores".
+
+Ideas:
+{ideas_json}
