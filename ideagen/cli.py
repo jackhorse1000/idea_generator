@@ -12,7 +12,8 @@ from ideagen.pipeline import Pipeline
 @click.option('--skip-score', is_flag=True, help='Skip scoring step')
 @click.option('--generation-prompt', default=None, type=click.Path(exists=True), help='Custom generation prompt file')
 @click.option('--evaluation-prompt', default=None, type=click.Path(exists=True), help='Custom evaluation prompt file')
-def main(topic, num_ideas, output, scores_output, model, skip_dedupe, skip_score, generation_prompt, evaluation_prompt):
+@click.option('--iterations', default=1, type=int, show_default=True, help='Number of generate-evaluate iterations')
+def main(topic, num_ideas, output, scores_output, model, skip_dedupe, skip_score, generation_prompt, evaluation_prompt, iterations):
     logging.basicConfig(level=logging.INFO)
     gen_prompt = None
     eval_prompt = None
@@ -31,7 +32,8 @@ def main(topic, num_ideas, output, scores_output, model, skip_dedupe, skip_score
         evaluation_prompt=eval_prompt,
         skip_dedupe=skip_dedupe,
         skip_score=skip_score,
-        scores_output_path=scores_output
+        scores_output_path=scores_output,
+        iterations=iterations
     )
     click.echo(f"Generated {len(results.ideas)} ideas.")
     if output:

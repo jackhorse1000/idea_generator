@@ -1,0 +1,15 @@
+Generate {ideas_n} simple mobile app ideas for the following topic:
+
+**Topic:** {topic}
+
+**Evaluator Feedback (if any):** {feedback}
+
+**Previously Generated Ideas (avoid duplicates):** {previous_ideas_json}
+
+For each idea, provide:
+- problem: What problem does it solve?
+- target_user: Who is the target user?
+- core_feature: What is the main feature?
+- monetization: How will it make money?
+
+Output as a JSON dictionary where the key is a short app name and the value contains the details above.

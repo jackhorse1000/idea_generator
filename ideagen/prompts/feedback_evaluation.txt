@@ -1,0 +1,18 @@
+Evaluate the following business ideas and provide:
+
+1. **Scores** for each idea:
+   - implementation_effort (1-10, 10 being most effort)
+   - revenue_potential (1-10, 10 being highest)
+   - feasibility (1-10, 10 being most feasible)
+
+2. **Feedback** to guide the next round of idea generation:
+   - What themes or angles are missing?
+   - What types of ideas should be explored next?
+   - Any gaps in the current set?
+
+Output as JSON with two top-level keys:
+- "idea_scores": dict mapping idea name to scores
+- "feedback": string with guidance for generating better/different ideas
+
+Ideas:
+{ideas_json}
