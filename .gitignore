@@ -188,6 +188,23 @@ cython_debug/
 #  you could uncomment the following to ignore the entire vscode folder
 # .vscode/
 
+# macOS cruft
+.DS_Store
+
+# Local editor settings
+.vscode/
+
+# Model and cache artifacts
+.cache/
+sentence-transformers/
+
+# Run artifacts and outputs
+results.json
+scores_*.json
+all_ideas.json
+examples/*/output/
+**/output/
+
 # Ruff stuff:
 .ruff_cache/
 
